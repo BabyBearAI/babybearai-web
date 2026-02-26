@@ -1,0 +1,54 @@
+name: Daily AI Tools Update
+
+on:
+  schedule:
+    # 每天北京时间早上8点运行 (UTC 00:00)
+    - cron: '0 0 * * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  update-tools:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: npm install cheerio axios
+      
+    - name: Fetch and update AI tools
+      env:
+        BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+      run: node scripts/fetch-new-tools.js
+      
+    - name: Check for changes
+      id: check_changes
+      run: |
+        if git diff --quiet; then
+          echo "changed=false" >> $GITHUB_OUTPUT
+        else
+          echo "changed=true" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Commit and push changes
+      if: steps.check_changes.outputs.changed == 'true'
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+        git add .
+        git commit -m "Auto-update: Add new AI tools [$(date +%Y-%m-%d)]"
+        git push
+        
+    - name: Deploy to Vercel
+      if: steps.check_changes.outputs.changed == 'true'
+      uses: vercel/action-deploy@v1
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabyBear AI - 有温度的 AI 工具推荐</title>
+    <meta name="description" content="发现好用的、有人情味的 AI 工具，让技术更温暖">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧸</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        },
+                        warm: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            400: '#a8a29e',
+                            500: '#78716c',
+                            600: '#57534e',
+                            700: '#44403c',
+                            800: '#292524',
+                            900: '#1c1917',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #fafaf9 0%, #fff7ed 100%);
+            min-height: 100vh;
+        }
+        .tool-card {
+            transition: all 0.3s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 bg-primary-50 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                </svg>
+                <span>发现好用的 AI 工具</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-warm-800 mb-6 tracking-tight">
+                有温度的
+                <span class="text-primary-500"> AI 工具</span>
+                <br>
+                推荐站
+            </h1>
+            <p class="text-lg sm:text-xl text-warm-600 max-w-2xl mx-auto leading-relaxed">
+                不追热点，只推荐真正好用、有人情味的 AI 工具
+                <br class="hidden sm:block">
+                让技术更温暖，让创作更简单
+            </p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="px-4 sm:px-6 lg:px-8 pb-8">
+        <div class="max-w-2xl mx-auto">
+            <div class="relative">
+                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-warm-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                <input 
+                    type="text" 
+                    id="searchInput"
+                    placeholder="搜索工具、功能、标签..." 
+                    class="w-full pl-12 pr-4 py-4 bg-white rounded-2xl border border-warm-200 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-transparent shadow-sm text-warm-700 placeholder-warm-400"
+                >
+            </div>
+        </div>
+    </section>
+
+    <!-- Region Filter -->
+    <section class="px-4 sm:px-6 lg:px-8 pb-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-wrap gap-2 justify-center" id="regionFilters">
+                <!-- Region filters will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="px-4 sm:px-6 lg:px-8 pb-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-wrap gap-2 justify-center" id="categoryFilters">
+                <!-- Categories will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="px-4 sm:px-6 lg:px-8 pb-12" id="featuredSection">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-2 mb-6">
+                <svg class="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                </svg>
+                <h2 class="text-xl font-semibold text-warm-800">精选推荐</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="featuredGrid">
+                <!-- Featured tools will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- All Tools Section -->
+    <section class="px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-warm-800" id="toolsTitle">全部工具</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="toolsGrid">
+                <!-- Tools will be inserted here -->
+            </div>
+            <div class="text-center py-16 hidden" id="noResults">
+                <div class="text-4xl mb-4">🔍</div>
+                <p class="text-warm-500">没找到相关工具，换个关键词试试？</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-warm-200 bg-white/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🐻</span>
+                    <span class="font-semibold text-warm-800">BabyBear AI</span>
+                </div>
+                <p class="text-sm text-warm-500 flex items-center gap-1">
+                    Made with 
+                    <svg class="w-3.5 h-3.5 text-red-400 fill-red-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                    </svg>
+                    for AI enthusiasts
+                </p>
+                <p class="text-sm text-warm-400">© 2025 BabyBear AI. 持续更新中...</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

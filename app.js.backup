@@ -1,0 +1,712 @@
+// 工具数据
+const categories = [
+    { id: "all", name: "全部", icon: "🐻" },
+    { id: "chat", name: "AI 对话", icon: "💬" },
+    { id: "image", name: "图像生成", icon: "🎨" },
+    { id: "writing", name: "写作辅助", icon: "✍️" },
+    { id: "video", name: "视频创作", icon: "🎬" },
+    { id: "audio", name: "音频处理", icon: "🎵" },
+    { id: "productivity", name: "效率工具", icon: "⚡" },
+    { id: "learning", name: "学习助手", icon: "📚" },
+];
+
+// 地区标签
+const regionLabels = {
+    cn: "🇨🇳 中文站",
+    global: "🌍 英文站",
+    both: "🌐 全支持"
+};
+
+const tools = [
+    {
+        id: "1",
+        name: "ChatGPT",
+        description: "最知名的 AI 对话助手，能回答问题、写文章、编程、头脑风暴，适合各种日常任务",
+        category: "chat",
+        url: "https://chat.openai.com",
+        tags: ["对话", "全能", "必用"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+        region: "global",
+    },
+    {
+        id: "2",
+        name: "Claude",
+        description: "Anthropic 出品，擅长长文本分析、代码理解和深度对话，回答更细腻",
+        category: "chat",
+        url: "https://claude.ai",
+        tags: ["长文本", "分析", "代码"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "3",
+        name: "Midjourney",
+        description: "艺术感最强的 AI 绘画工具，生成的图片精致唯美，适合设计、创意",
+        category: "image",
+        url: "https://www.midjourney.com",
+        tags: ["绘画", "艺术", "高质量"],
+        isFree: false,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "4",
+        name: "Leonardo.ai",
+        description: "免费额度充足的 AI 绘图工具，游戏资产、插画、写实风格都能胜任",
+        category: "image",
+        url: "https://leonardo.ai",
+        tags: ["绘画", "免费", "游戏"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "5",
+        name: "Notion AI",
+        description: "在 Notion 里直接调用 AI 辅助写作、整理笔记、总结内容，工作流无缝衔接",
+        category: "writing",
+        url: "https://www.notion.so",
+        tags: ["写作", "笔记", "效率"],
+        isFree: false,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "6",
+        name: "秘塔写作猫",
+        description: "中文写作好帮手，纠错、改写、续写都能做，对中文支持很好",
+        category: "writing",
+        url: "https://xiezuocat.com",
+        tags: ["中文", "写作", "纠错"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "7",
+        name: "剪映",
+        description: "字节出品，内置 AI 字幕、AI 配音、一键成片，短视频创作神器",
+        category: "video",
+        url: "https://www.capcut.com",
+        tags: ["视频", "剪辑", "字幕"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "8",
+        name: "HeyGen",
+        description: "AI 数字人视频生成，输入文字就能生成真人出镜的视频，适合口播",
+        category: "video",
+        url: "https://www.heygen.com",
+        tags: ["数字人", "视频", "口播"],
+        isFree: false,
+        hasPaidPlan: true,
+    },
+    {
+        id: "9",
+        name: "Suno",
+        description: "AI 音乐生成，输入歌词或描述就能生成完整歌曲，旋律和编曲都很专业",
+        category: "audio",
+        url: "https://suno.ai",
+        tags: ["音乐", "创作", "歌曲"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "10",
+        name: "ElevenLabs",
+        description: "最自然的 AI 配音工具，支持中文，情绪表达丰富，适合做有声内容",
+        category: "audio",
+        url: "https://elevenlabs.io",
+        tags: ["配音", "语音", "TTS"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "11",
+        name: "Perplexity",
+        description: "AI 搜索引擎，直接给出带来源的答案，省去翻页查找的时间",
+        category: "productivity",
+        url: "https://www.perplexity.ai",
+        tags: ["搜索", "研究", "信息"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "12",
+        name: "Gamma",
+        description: "AI 生成 PPT，输入主题自动排版设计，演示文稿几分钟搞定",
+        category: "productivity",
+        url: "https://gamma.app",
+        tags: ["PPT", "演示", "设计"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "13",
+        name: "Kimi",
+        description: "Moonshot 出品，超长文本处理，读论文、读报告、整理资料很实用",
+        category: "learning",
+        url: "https://kimi.moonshot.cn",
+        tags: ["长文本", "阅读", "中文"],
+        isFree: true,
+        hasPaidPlan: false,
+        featured: true,
+    },
+    {
+        id: "14",
+        name: "豆包",
+        description: "字节跳动出品，中文对话流畅，集成搜索，日常问答和创作都能用",
+        category: "chat",
+        url: "https://www.doubao.com",
+        tags: ["中文", "对话", "搜索"],
+        isFree: true,
+        hasPaidPlan: false,
+    },
+    {
+        id: "15",
+        name: "Remove.bg",
+        description: "一键抠图，自动去除背景，效果精准，做设计、做证件照必备",
+        category: "image",
+        url: "https://www.remove.bg",
+        tags: ["抠图", "图片处理", "设计"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "16",
+        name: "Runway",
+        description: "AI 视频编辑和生成，能做视频抠图、风格迁移、图像生成视频",
+        category: "video",
+        url: "https://runwayml.com",
+        tags: ["视频", "AI 生成", "专业"],
+        isFree: false,
+        hasPaidPlan: true,
+    },
+    // ===== 新增工具 =====
+    // AI 对话
+    {
+        id: "17",
+        name: "Gemini",
+        description: "Google 出品的多模态 AI，支持文本、图像、视频理解，与 Google 生态深度整合",
+        category: "chat",
+        url: "https://gemini.google.com",
+        tags: ["对话", "多模态", "搜索"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "18",
+        name: "Copilot",
+        description: "微软 AI 助手，集成在 Windows 和 Edge 中，支持联网搜索和文档处理",
+        category: "chat",
+        url: "https://copilot.microsoft.com",
+        tags: ["对话", "搜索", "微软"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "19",
+        name: "Poe",
+        description: "Quora 出品，一个平台集齐 GPT-4、Claude、Gemini 等多个 AI 模型",
+        category: "chat",
+        url: "https://poe.com",
+        tags: ["聚合", "多模型", "机器人"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "20",
+        name: "Character.AI",
+        description: "与各种 AI 角色对话，从名人到虚拟角色，娱乐性和趣味性很强",
+        category: "chat",
+        url: "https://character.ai",
+        tags: ["角色", "娱乐", "对话"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    // AI 绘画
+    {
+        id: "21",
+        name: "DALL-E 3",
+        description: "OpenAI 出品，理解提示词能力最强，文字渲染效果好，集成在 ChatGPT 中",
+        category: "image",
+        url: "https://openai.com/dall-e-3",
+        tags: ["绘画", "OpenAI", "文字渲染"],
+        isFree: false,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "22",
+        name: "Adobe Firefly",
+        description: "Adobe 官方 AI 工具，与 PS、Illustrator 无缝集成，支持商业用途",
+        category: "image",
+        url: "https://firefly.adobe.com",
+        tags: ["绘画", "商业", "设计"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "23",
+        name: "Playground",
+        description: "融合多种模型的 AI 绘图平台，支持图层和混合模式，类似 AI 版 Photoshop",
+        category: "image",
+        url: "https://playgroundai.com",
+        tags: ["绘画", "图层", "混合"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "24",
+        name: "SeaArt",
+        description: "国产 AI 绘画平台，模型丰富，中文支持好，社区活跃",
+        category: "image",
+        url: "https://www.seaart.ai",
+        tags: ["绘画", "国产", "社区"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    // AI 视频
+    {
+        id: "25",
+        name: "Pika",
+        description: "AI 视频生成新秀，支持文生视频和图生视频，特效和转场很出色",
+        category: "video",
+        url: "https://pika.art",
+        tags: ["视频", "生成", "特效"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "26",
+        name: "可灵 AI",
+        description: "快手出品，国产最强的 AI 视频生成，物理规律理解好，支持长视频",
+        category: "video",
+        url: "https://klingai.com",
+        tags: ["视频", "国产", "快手"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "27",
+        name: "Luma Dream Machine",
+        description: "Luma 出品，视频生成速度快，动作流畅自然，物理效果逼真",
+        category: "video",
+        url: "https://lumalabs.ai/dream-machine",
+        tags: ["视频", "3D", "快速"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "28",
+        name: "Haiper",
+        description: "免费额度很多的 AI 视频生成工具，支持文生视频和图生视频",
+        category: "video",
+        url: "https://haiper.ai",
+        tags: ["视频", "免费", "生成"],
+        isFree: true,
+        hasPaidPlan: false,
+    },
+    // AI 编程（新增分类相关）
+    {
+        id: "29",
+        name: "Cursor",
+        description: "基于 VS Code 的 AI 编辑器，代码补全和重构能力极强，支持整个项目理解",
+        category: "productivity",
+        url: "https://cursor.sh",
+        tags: ["编程", "代码", "编辑器"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "30",
+        name: "GitHub Copilot",
+        description: "GitHub 出品，最知名的 AI 编程助手，支持多种编程语言和 IDE",
+        category: "productivity",
+        url: "https://github.com/copilot",
+        tags: ["编程", "代码", "GitHub"],
+        isFree: false,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "31",
+        name: "Codeium",
+        description: "免费的 AI 编程助手，支持 70+ 语言和 40+ IDE，个人版永久免费",
+        category: "productivity",
+        url: "https://codeium.com",
+        tags: ["编程", "代码", "免费"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "32",
+        name: "v0.dev",
+        description: "Vercel 出品，AI 生成 React 组件和界面，前端开发神器",
+        category: "productivity",
+        url: "https://v0.dev",
+        tags: ["编程", "前端", "React"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    // AI 音乐
+    {
+        id: "33",
+        name: "Udio",
+        description: "AI 音乐生成，人声效果极佳，支持多种音乐风格，被认为是 Suno 的有力竞争者",
+        category: "audio",
+        url: "https://udio.com",
+        tags: ["音乐", "人声", "创作"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "34",
+        name: "Suno",
+        description: "AI 音乐生成，输入歌词或描述就能生成完整歌曲",
+        category: "audio",
+        url: "https://suno.com",
+        tags: ["音乐", "创作", "歌曲"],
+        isFree: true,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "35",
+        name: "Mureka",
+        description: "国产 AI 音乐生成，支持中文歌曲，旋律和编曲质量不错",
+        category: "audio",
+        url: "https://www.mureka.ai",
+        tags: ["音乐", "中文", "国产"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    // AI 效率工具
+    {
+        id: "36",
+        name: "Otter.ai",
+        description: "AI 会议记录助手，实时转录语音，自动生成会议摘要和待办",
+        category: "productivity",
+        url: "https://otter.ai",
+        tags: ["会议", "转录", "效率"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "37",
+        name: "Notion AI",
+        description: "在 Notion 里直接调用 AI 辅助写作、整理笔记、总结内容",
+        category: "writing",
+        url: "https://notion.so",
+        tags: ["笔记", "写作", "效率"],
+        isFree: false,
+        hasPaidPlan: true,
+        featured: true,
+    },
+    {
+        id: "38",
+        name: "Tldraw",
+        description: "AI 驱动的无限画布，随手画草图就能生成应用原型，集成 GPT-4V",
+        category: "productivity",
+        url: "https://tldraw.com",
+        tags: ["白板", "原型", "设计"],
+        isFree: true,
+        hasPaidPlan: false,
+    },
+    {
+        id: "39",
+        name: "Beautiful.ai",
+        description: "AI 生成精美 PPT，自动排版和设计，让演示文稿更专业",
+        category: "productivity",
+        url: "https://www.beautiful.ai",
+        tags: ["PPT", "演示", "设计"],
+        isFree: false,
+        hasPaidPlan: true,
+    },
+    // AI 学习研究
+    {
+        id: "40",
+        name: "Elicit",
+        description: "AI 研究助手，自动搜索和分析学术论文，帮你做文献综述",
+        category: "learning",
+        url: "https://elicit.org",
+        tags: ["学术", "论文", "研究"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "41",
+        name: "Consensus",
+        description: "AI 学术搜索引擎，从研究论文中找到答案，每个结论都有出处",
+        category: "learning",
+        url: "https://consensus.app",
+        tags: ["学术", "论文", "证据"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "42",
+        name: "Scholarcy",
+        description: "AI 阅读助手，自动提取论文要点、生成摘要和 flashcard",
+        category: "learning",
+        url: "https://www.scholarcy.com",
+        tags: ["学术", "阅读", "摘要"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    // AI 设计
+    {
+        id: "43",
+        name: "Canva AI",
+        description: "集成在 Canva 中的 AI 功能，支持 AI 绘画、智能排版、文案生成",
+        category: "image",
+        url: "https://www.canva.com",
+        tags: ["设计", "排版", "模板"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "44",
+        name: "Galileo AI",
+        description: "AI 生成 UI 设计稿，文字描述就能生成可编辑的 Figma 设计",
+        category: "image",
+        url: "https://galileo.ai",
+        tags: ["UI", "设计", "原型"],
+        isFree: false,
+        hasPaidPlan: true,
+    },
+    {
+        id: "45",
+        name: "Looka",
+        description: "AI 生成 logo 和品牌设计，输入公司名就能生成整套品牌方案",
+        category: "image",
+        url: "https://looka.com",
+        tags: ["logo", "品牌", "设计"],
+        isFree: false,
+        hasPaidPlan: true,
+    },
+    // AI 社区/平台
+    {
+        id: "46",
+        name: "Hugging Face",
+        description: "最大的 AI 开源社区，提供模型、数据集、 Spaces 部署平台",
+        category: "productivity",
+        url: "https://huggingface.co",
+        tags: ["开源", "模型", "社区"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "47",
+        name: "Civitai",
+        description: "Stable Diffusion 模型分享社区，海量 LoRA 和 Checkpoint 模型",
+        category: "image",
+        url: "https://civitai.com",
+        tags: ["模型", "社区", "SD"],
+        isFree: true,
+        hasPaidPlan: false,
+    },
+    {
+        id: "48",
+        name: "Replicate",
+        description: "运行开源 AI 模型的云平台， thousands 个模型一键运行和 API 调用",
+        category: "productivity",
+        url: "https://replicate.com",
+        tags: ["API", "模型", "部署"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    // 更多国产工具
+    {
+        id: "49",
+        name: "文心一言",
+        description: "百度出品的大语言模型，中文理解和生成能力强，集成搜索",
+        category: "chat",
+        url: "https://yiyan.baidu.com",
+        tags: ["对话", "中文", "百度"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "50",
+        name: "通义千问",
+        description: "阿里出品，多模态能力强，支持文档理解、代码生成、长文本",
+        category: "chat",
+        url: "https://tongyi.aliyun.com",
+        tags: ["对话", "中文", "阿里"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "51",
+        name: "智谱清言",
+        description: "智谱 AI 出品，GLM-4 模型支持长文本和代码，中文表现优秀",
+        category: "chat",
+        url: "https://chatglm.cn",
+        tags: ["对话", "中文", "GLM"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+    {
+        id: "52",
+        name: "讯飞星火",
+        description: "科大讯飞出品，语音识别能力强，支持多模态交互",
+        category: "chat",
+        url: "https://xinghuo.xfyun.cn",
+        tags: ["对话", "语音", "国产"],
+        isFree: true,
+        hasPaidPlan: true,
+    },
+];
+
+// 状态
+let activeCategory = "all";
+let searchQuery = "";
+
+// 初始化
+function init() {
+    renderCategories();
+    renderFeatured();
+    renderTools();
+    setupEventListeners();
+}
+
+// 渲染分类筛选
+function renderCategories() {
+    const container = document.getElementById("categoryFilters");
+    container.innerHTML = categories.map(cat => `
+        <button 
+            onclick="setCategory('${cat.id}')"
+            class="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                activeCategory === cat.id
+                    ? "bg-primary-500 text-white shadow-md shadow-primary-200"
+                    : "bg-white text-warm-600 hover:bg-warm-50 border border-warm-200"
+            }"
+        >
+            <span>${cat.icon}</span>
+            <span>${cat.name}</span>
+        </button>
+    `).join("");
+}
+
+// 渲染精选推荐
+function renderFeatured() {
+    const container = document.getElementById("featuredGrid");
+    const featured = tools.filter(t => t.featured);
+    container.innerHTML = featured.map(tool => createToolCard(tool)).join("");
+}
+
+// 渲染工具列表
+function renderTools() {
+    const container = document.getElementById("toolsGrid");
+    const noResults = document.getElementById("noResults");
+    const featuredSection = document.getElementById("featuredSection");
+    const toolsTitle = document.getElementById("toolsTitle");
+    
+    // 筛选
+    const filtered = tools.filter(tool => {
+        const matchesCategory = activeCategory === "all" || tool.category === activeCategory;
+        const matchesSearch = searchQuery === "" ||
+            tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            tool.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        return matchesCategory && matchesSearch;
+    });
+    
+    // 显示/隐藏精选区域
+    if (searchQuery !== "" || activeCategory !== "all") {
+        featuredSection.classList.add("hidden");
+    } else {
+        featuredSection.classList.remove("hidden");
+    }
+    
+    // 更新标题
+    if (searchQuery) {
+        toolsTitle.textContent = `搜索结果 (${filtered.length})`;
+    } else if (activeCategory !== "all") {
+        const cat = categories.find(c => c.id === activeCategory);
+        toolsTitle.textContent = cat ? cat.name : "全部工具";
+    } else {
+        toolsTitle.textContent = "全部工具";
+    }
+    
+    // 渲染
+    if (filtered.length === 0) {
+        container.innerHTML = "";
+        noResults.classList.remove("hidden");
+    } else {
+        container.innerHTML = filtered.map(tool => createToolCard(tool)).join("");
+        noResults.classList.add("hidden");
+    }
+}
+
+// 创建工具卡片
+function createToolCard(tool) {
+    return `
+        <div class="tool-card bg-white rounded-2xl p-6 shadow-sm border border-warm-100 hover:border-primary-200">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-semibold text-warm-800 hover:text-primary-600 transition-colors">
+                    ${tool.name}
+                </h3>
+                <div class="flex items-center gap-1">
+                    ${tool.featured ? `
+                        <svg class="w-4 h-4 text-primary-400 fill-primary-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                    ` : ""}
+                    ${tool.isFree ? `
+                        <span class="text-xs bg-green-50 text-green-600 px-2 py-0.5 rounded-full font-medium">免费</span>
+                    ` : ""}
+                </div>
+            </div>
+            <p class="text-warm-600 text-sm leading-relaxed mb-4">
+                ${tool.description}
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                ${tool.tags.map(tag => `
+                    <span class="text-xs bg-warm-50 text-warm-500 px-2 py-1 rounded-md">${tag}</span>
+                `).join("")}
+            </div>
+            <a 
+                href="${tool.url}" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors"
+            >
+                访问网站
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+            </a>
+        </div>
+    `;
+}
+
+// 设置分类
+function setCategory(id) {
+    activeCategory = id;
+    renderCategories();
+    renderTools();
+}
+
+// 设置事件监听
+function setupEventListeners() {
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", (e) => {
+        searchQuery = e.target.value.trim();
+        renderTools();
+    });
+}
+
+// 启动
+document.addEventListener("DOMContentLoaded", init);
