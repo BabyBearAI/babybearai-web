@@ -1,0 +1,21 @@
+{
+  "name": "babybear-offer-mailer",
+  "version": "1.0.0",
+  "description": "Send official BabyBear bilingual summer camp offer letters via SMTP (babybearai.com).",
+  "type": "module",
+  "bin": {
+    "send-offer": "./send-offer.js"
+  },
+  "scripts": {
+    "send": "node send-offer.js",
+    "preview": "node send-offer.js --preview",
+    "verify": "node send-offer.js --verify"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "nodemailer": "^6.9.14"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

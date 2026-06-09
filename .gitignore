@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# secrets / env
+.env
+**/.env
+
+# vercel
+.vercel
+
+# email preview output
+email-service/preview.html
+
+# os
+.DS_Store
