@@ -12,8 +12,32 @@ const onScroll = () => nav?.classList.toggle('scrolled', window.scrollY > 40);
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
+// Parallax — translate background layers slower than scroll (desktop only)
+const layers = [...document.querySelectorAll('[data-parallax]')];
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canParallax = layers.length && !reduceMotion && window.matchMedia('(min-width: 880px)').matches;
+if (canParallax) {
+  let ticking = false;
+  const render = () => {
+    const vh = window.innerHeight;
+    for (const el of layers) {
+      const sec = el.parentElement;
+      const r = sec.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) continue; // skip off-screen
+      const fromCenter = (r.top + r.height / 2) - vh / 2;
+      const speed = parseFloat(el.dataset.parallax) || 0.12;
+      el.style.transform = `translate3d(0, ${(-fromCenter * speed).toFixed(1)}px, 0)`;
+    }
+    ticking = false;
+  };
+  const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(render); } };
+  render();
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue, { passive: true });
+}
+
 // Subtle scroll reveal
-const toReveal = document.querySelectorAll('.statement, .block, .stats, .gallery, .enroll');
+const toReveal = document.querySelectorAll('.statement, .block, .stats, .banner-inner, .gallery, .enroll');
 toReveal.forEach(el => el.classList.add('reveal'));
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
