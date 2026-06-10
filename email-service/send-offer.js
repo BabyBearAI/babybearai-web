@@ -41,23 +41,35 @@ if (args.help || args.h) {
   console.log(`
 BabyBear Offer Mailer
 
+  --template <name>   "offer" (录取信) or "invite" (邀请函)       (default: offer)
+  --invite            Shortcut for --template invite
+
   --to <email>        Recipient (parent) email address          [required to send]
   --child <name>      Child's name                              (default: "your child")
   --parent <name>     Parent's name                             (default: "Parent")
-  --session <text>    Program / week name                       (default: all-summer)
+  --session <text>    Program / week name (offer)               (default: all-summer)
   --dates <text>      Program dates
   --hours <text>      Daily hours
+  --ages <text>       Age range (invite)
   --location <text>   Location text
   --tuition <text>    Tuition text
-  --reply-by <text>   Reply-by deadline
-  --contact <email>   Contact address shown in the letter       (default: REPLY_TO/FROM_EMAIL)
+  --reply-by <text>   Reply-by deadline (offer)
+  --apply-by <text>   Priority application deadline (invite)
+  --contact <email>   Contact address shown in the email        (default: REPLY_TO/FROM_EMAIL)
   --subject <text>    Override the email subject
 
-  --preview           Render to ./preview.html, do not send (no SMTP needed)
+  --preview           Render to ./preview-<template>.html, do not send (no SMTP needed)
   --verify            Verify SMTP connection only
   --help              Show this help
 `);
   process.exit(0);
+}
+
+// ---------- template selection ----------
+const template = args.invite ? 'invite' : (args.template || 'offer');
+if (!['offer', 'invite'].includes(template)) {
+  console.error(`❌ Unknown --template "${template}". Use "offer" or "invite".`);
+  process.exit(1);
 }
 
 // ---------- content defaults ----------
@@ -70,9 +82,11 @@ const fields = {
   session: args.session || '整夏 5 周 · All-Summer (Weeks 1–5)',
   dates: args.dates || 'July 6 – August 7, 2026',
   hours: args.hours || 'Mon–Fri, 9:00 AM – 3:00 PM',
+  ages: args.ages || '3–5 岁 · Ages 3–5',
   location: args.location || 'Seattle, WA (details to follow)',
   tuition: args.tuition || '$1,999 全夏 / $450 per week',
   replyBy: args['reply-by'] || 'June 20, 2026',
+  applyBy: args['apply-by'] || 'May 31, 2026',
   contactEmail,
   year,
 };
@@ -81,7 +95,7 @@ const fields = {
 function render(tpl, data) {
   return tpl.replace(/\{\{(\w+)\}\}/g, (_, k) => (data[k] !== undefined ? String(data[k]) : ''));
 }
-function buildText(d) {
+function buildOfferText(d) {
   return [
     `恭喜 ${d.childName}！/ Congratulations!`,
     ``,
@@ -102,19 +116,44 @@ function buildText(d) {
     `babybearai.com`,
   ].join('\n');
 }
+function buildInviteText(d) {
+  return [
+    `诚邀 ${d.childName} 加入 BabyBear 小熊双语夏令营 2026 夏天。`,
+    `An invitation for ${d.childName} to join BabyBear's Summer 2026.`,
+    ``,
+    `亲爱的 ${d.parentName}，我们诚挚邀请 ${d.childName} 加入这所以双语与自然为本的夏日学园（3–5 岁）。`,
+    `Dear ${d.parentName}, we warmly invite ${d.childName} to a bilingual summer rooted in nature and gentle care.`,
+    ``,
+    `日期 Dates   : ${d.dates}`,
+    `时间 Hours   : ${d.hours}`,
+    `年龄 Ages    : ${d.ages}`,
+    `地点 Location: ${d.location}`,
+    `学费 Tuition : ${d.tuition}`,
+    ``,
+    `名额有限，优先录取截止 ${d.applyBy}。在线申请：https://babybearai.com/#enroll`,
+    `Places are limited; priority applications close ${d.applyBy}. Apply: https://babybearai.com/#enroll`,
+    ``,
+    `如有疑问请来信 ${d.contactEmail}。`,
+    `BabyBear 招生团队 / The BabyBear Admissions Team`,
+    `babybearai.com`,
+  ].join('\n');
+}
 
-const tplPath = path.join(__dirname, 'templates', 'offer.html');
+const tplPath = path.join(__dirname, 'templates', `${template}.html`);
 const html = render(fs.readFileSync(tplPath, 'utf8'), fields);
-const text = buildText(fields);
-const subject = args.subject || `🧸 录取通知 Offer · ${fields.childName} @ BabyBear 小熊双语夏令营`;
+const text = template === 'invite' ? buildInviteText(fields) : buildOfferText(fields);
+const subject = args.subject || (template === 'invite'
+  ? `诚邀 ${fields.childName} 加入 BabyBear 2026 夏令营 · You're Invited`
+  : `录取通知 Offer · ${fields.childName} @ BabyBear 小熊双语夏令营`);
 
 // ---------- preview mode ----------
 if (args.preview) {
-  const out = path.join(__dirname, 'preview.html');
+  const out = path.join(__dirname, `preview-${template}.html`);
   fs.writeFileSync(out, html);
   console.log('✅ Preview written to', out);
-  console.log('   Subject:', subject);
-  console.log('   Open it in a browser to review the offer layout. No email was sent.');
+  console.log('   Template:', template);
+  console.log('   Subject :', subject);
+  console.log('   Open it in a browser to review the layout. No email was sent.');
   process.exit(0);
 }
 
@@ -167,9 +206,9 @@ try {
     text,
     html,
   });
-  console.log('✅ Offer sent to', args.to);
+  console.log(`✅ ${template === 'invite' ? 'Invitation' : 'Offer'} sent to`, args.to);
   console.log('   Child   :', fields.childName);
-  console.log('   Session :', fields.session);
+  if (template === 'offer') console.log('   Session :', fields.session);
   console.log('   Message :', info.messageId);
 } catch (err) {
   console.error('❌ Failed to send:', err.message);
