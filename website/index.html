@@ -7,45 +7,57 @@
 <meta name="description" content="西雅图面向 3–5 岁孩子的中英双语夏令营。沉浸式语言、自然与艺术、温柔照护。A bilingual summer camp in Seattle for ages 3–5." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" href="images/mascot.jpg" />
 </head>
 <body id="top">
 
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">2026 夏季招生开放中 · <b>Summer 2026 Enrollment Now Open</b> — 名额有限</div>
+
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <a class="brand" href="#top">
-    <img src="images/mascot.jpg" alt="BabyBear" class="brand-logo" />
+    <span class="brand-mono">BB</span>
     <span class="brand-text">BabyBear<em>小熊双语夏令营</em></span>
   </a>
-  <nav class="nav-links">
-    <a href="#about">关于</a>
-    <a href="#program">课程</a>
-    <a href="#weeks">主题</a>
-    <a href="#info">信息</a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#about">关于 About</a>
+    <a href="#approach">理念 Approach</a>
+    <a href="#weeks">课程 Curriculum</a>
+    <a href="#info">招生 Admissions</a>
   </nav>
-  <a href="#enroll" class="btn-line">报名 Enroll</a>
+  <a href="#enroll" class="nav-cta">申请 Apply</a>
   <button class="nav-toggle" id="navToggle" aria-label="menu">☰</button>
 </header>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="hero-text">
-    <span class="kicker">Seattle · Ages 3–5 · Bilingual</span>
-    <h1>小熊在这里，<br/>双语共成长。</h1>
-    <p class="hero-en">A quiet, beautiful place for little ones<br/>to grow up bilingual.</p>
+  <div class="hero-bg"><img src="images/hero.jpg" alt="Children at BabyBear bilingual summer camp" /></div>
+  <div class="hero-inner">
+    <span class="hero-crest">BB</span>
+    <span class="kicker">Est. 2026 · Seattle, Washington · Ages 3–5</span>
+    <h1>双语启蒙,<br/>从一个温柔的夏天开始。</h1>
+    <p class="hero-en">A bilingual beginning, rooted in nature and care.</p>
     <p class="hero-lead">
-      西雅图的中英双语夏令营,专为 3 至 5 岁的孩子而设。
-      在自然、艺术与温柔的陪伴中,让中文与英文自然生长。
+      BabyBear 是西雅图的中英双语夏令营,专为 3 至 5 岁的孩子而设。
+      在常青森林、艺术与音乐中,让中文与英文如母语般自然生长。
     </p>
     <div class="hero-cta">
-      <a href="#enroll" class="btn-solid">预约名额 Enroll</a>
-      <a href="#program" class="btn-text">了解课程 →</a>
+      <a href="#enroll" class="btn-solid">申请名额 Apply Now</a>
+      <a href="#approach" class="btn-ghost">了解理念 Our Approach</a>
     </div>
   </div>
-  <div class="hero-img">
-    <img src="images/hero.jpg" alt="Children at BabyBear bilingual summer camp" />
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat"><b>1:5</b><span>师生比 Ratio</span></div>
+    <div class="stat"><b>5</b><span>主题周 Themed Weeks</span></div>
+    <div class="stat"><b>3–5</b><span>适龄 Ages</span></div>
+    <div class="stat"><b>100%</b><span>双语沉浸 Immersion</span></div>
   </div>
 </section>
 
@@ -65,7 +77,8 @@
   </div>
   <div class="block-body">
     <span class="eyebrow">关于我们 · About</span>
-    <h2>把这段时光,<br/>过成一场温柔的双语旅程。</h2>
+    <div class="rule"></div>
+    <h2>一所以双语与<br/>自然为本的夏日学园。</h2>
     <p>
       我们相信,最好的语言学习发生在孩子忘记自己「正在学习」的时刻。
       这里没有课本与测验,只有真实的体验——在西雅图的森林里寻找松果,
@@ -78,35 +91,37 @@
   </div>
 </section>
 
-<!-- ============ PROGRAM ============ -->
-<section id="program" class="block">
-  <div class="block-head">
-    <span class="eyebrow">课程 · Program</span>
-    <h2>我们给孩子的,<br/>是一整个夏天的从容。</h2>
+<!-- ============ APPROACH ============ -->
+<section id="approach" class="block tint">
+  <div class="block-head center">
+    <span class="eyebrow">我们的理念 · Our Approach</span>
+    <div class="rule"></div>
+    <h2>三根支柱,撑起一整个夏天。</h2>
   </div>
-  <div class="trio">
-    <article>
-      <span class="num">01</span>
-      <h3>沉浸双语<br/><em>Immersion</em></h3>
-      <p>中英文每日交替沉浸,母语级老师以自然对话带孩子进入语言,而非背诵单词。</p>
+  <div class="pillars">
+    <article class="pillar">
+      <span class="num">I</span>
+      <h3>沉浸双语<em>Immersion</em></h3>
+      <p>中英文每日交替沉浸,母语级教师以自然对话带孩子进入语言,而非背诵单词。</p>
     </article>
-    <article>
-      <span class="num">02</span>
-      <h3>自然与艺术<br/><em>Nature &amp; Art</em></h3>
+    <article class="pillar">
+      <span class="num">II</span>
+      <h3>自然与艺术<em>Nature &amp; Art</em></h3>
       <p>常青森林里的探索,画布与黏土上的创作,音乐与律动——让语言连着真实的世界。</p>
     </article>
-    <article>
-      <span class="num">03</span>
-      <h3>温柔照护<br/><em>Gentle Care</em></h3>
-      <p>每位老师最多照看 5 个孩子,固定的每日节奏与温柔过渡,让安全感成为学习的底色。</p>
+    <article class="pillar">
+      <span class="num">III</span>
+      <h3>温柔照护<em>Gentle Care</em></h3>
+      <p>每位教师最多照看 5 个孩子,固定的每日节奏与温柔过渡,让安全感成为学习的底色。</p>
     </article>
   </div>
 </section>
 
-<!-- ============ WEEKS ============ -->
-<section id="weeks" class="block tint">
+<!-- ============ CURRICULUM / WEEKS ============ -->
+<section id="weeks" class="block">
   <div class="block-head">
-    <span class="eyebrow">主题周 · Themed Weeks</span>
+    <span class="eyebrow">课程安排 · Curriculum</span>
+    <div class="rule"></div>
     <h2>五周,五场冒险。</h2>
     <p class="muted">可单周报名,也可整夏参加。</p>
   </div>
@@ -120,6 +135,9 @@
 </section>
 
 <!-- ============ GALLERY ============ -->
+<div class="gallery-head">
+  <span class="eyebrow">校园日常 · Life at BabyBear</span>
+</div>
 <section class="gallery">
   <figure><img src="images/nature.jpg" alt="Nature exploration" /></figure>
   <figure><img src="images/arts.jpg" alt="Arts and crafts" /></figure>
@@ -127,10 +145,11 @@
   <figure><img src="images/food.jpg" alt="Food culture" /></figure>
 </section>
 
-<!-- ============ INFO ============ -->
+<!-- ============ INFO / ADMISSIONS ============ -->
 <section id="info" class="block">
   <div class="block-head">
-    <span class="eyebrow">信息 · Details</span>
+    <span class="eyebrow">招生信息 · Admissions</span>
+    <div class="rule"></div>
     <h2>报名前,你想知道的。</h2>
   </div>
   <div class="info-list">
@@ -143,45 +162,64 @@
 
 <!-- ============ ENROLL ============ -->
 <section id="enroll" class="enroll">
-  <span class="eyebrow light">报名 · Enroll</span>
-  <h2>让小熊加入我们。</h2>
-  <p class="muted">名额有限。留下信息,我们会尽快回复并发送正式录取信。</p>
-  <form id="enrollForm" class="enroll-form" novalidate>
-    <div class="row">
-      <input name="parent" required placeholder="家长姓名 Parent name" />
-      <input name="email" type="email" required placeholder="邮箱 Email" />
-    </div>
-    <div class="row">
-      <input name="child" placeholder="孩子姓名 Child's name" />
-      <select name="weeks">
-        <option value="">意向主题周 Preferred weeks</option>
-        <option>Week 1 · 自然探索</option>
-        <option>Week 2 · 艺术创想</option>
-        <option>Week 3 · 音乐律动</option>
-        <option>Week 4 · 美食文化</option>
-        <option>Week 5 · 小小科学家</option>
-        <option>整夏 5 周 All summer</option>
-      </select>
-    </div>
-    <textarea name="message" rows="2" placeholder="留言:过敏、需求或任何问题 Message"></textarea>
-    <button type="submit" class="btn-solid btn-block">提交报名意向 Submit</button>
-    <p class="form-note" id="formNote"></p>
-  </form>
-  <p class="enroll-alt">或来信 <a href="mailto:hello@babybearai.com">hello@babybearai.com</a></p>
+  <div class="enroll-inner">
+    <span class="eyebrow light">入学申请 · Apply</span>
+    <div class="rule"></div>
+    <h2>让小熊加入我们。</h2>
+    <p class="muted">名额有限。留下信息,我们会尽快回复并发送正式录取信。</p>
+    <form id="enrollForm" class="enroll-form" novalidate>
+      <div class="row">
+        <input name="parent" required placeholder="家长姓名 Parent name" />
+        <input name="email" type="email" required placeholder="邮箱 Email" />
+      </div>
+      <div class="row">
+        <input name="child" placeholder="孩子姓名 Child's name" />
+        <select name="weeks">
+          <option value="">意向主题周 Preferred weeks</option>
+          <option>Week 1 · 自然探索</option>
+          <option>Week 2 · 艺术创想</option>
+          <option>Week 3 · 音乐律动</option>
+          <option>Week 4 · 美食文化</option>
+          <option>Week 5 · 小小科学家</option>
+          <option>整夏 5 周 All summer</option>
+        </select>
+      </div>
+      <textarea name="message" rows="2" placeholder="留言:过敏、需求或任何问题 Message"></textarea>
+      <button type="submit" class="btn-solid btn-block">提交入学申请 Submit Application</button>
+      <p class="form-note" id="formNote"></p>
+    </form>
+    <p class="enroll-alt">或来信 <a href="mailto:hello@babybearai.com">hello@babybearai.com</a></p>
+  </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
-  <div class="brand">
-    <img src="images/mascot.jpg" alt="" class="brand-logo" />
-    <span class="brand-text">BabyBear<em>小熊双语夏令营</em></span>
+  <div class="footer-inner">
+    <div>
+      <div class="brand">
+        <span class="brand-mono">BB</span>
+        <span class="brand-text">BabyBear<em>小熊双语夏令营</em></span>
+      </div>
+      <p class="footer-tag">西雅图的中英双语夏令营,在自然与艺术中陪伴 3–5 岁孩子双语成长。</p>
+    </div>
+    <div class="footer-col">
+      <h4>探索 Explore</h4>
+      <a href="#about">关于 About</a>
+      <a href="#approach">理念 Approach</a>
+      <a href="#weeks">课程 Curriculum</a>
+      <a href="#info">招生 Admissions</a>
+    </div>
+    <div class="footer-col">
+      <h4>联系 Contact</h4>
+      <a href="mailto:hello@babybearai.com">hello@babybearai.com</a>
+      <p>Seattle, Washington</p>
+      <p>babybearai.com</p>
+    </div>
   </div>
-  <div class="foot-meta">
-    <span>Seattle, WA</span>
-    <a href="mailto:hello@babybearai.com">hello@babybearai.com</a>
-    <span>babybearai.com</span>
+  <div class="footer-bar">
+    <span>© 2026 BabyBear · A bilingual summer camp in Seattle</span>
+    <span>Bilingual by nature.</span>
   </div>
-  <div class="foot-copy">© 2026 BabyBear · A bilingual summer camp in Seattle</div>
 </footer>
 
 <script src="script.js"></script>

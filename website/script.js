@@ -6,8 +6,14 @@ const links = document.querySelector('.nav-links');
 toggle?.addEventListener('click', () => links.classList.toggle('open'));
 links?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
+// Nav: transparent over hero, solid once scrolled
+const nav = document.getElementById('nav');
+const onScroll = () => nav?.classList.toggle('scrolled', window.scrollY > 40);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+
 // Subtle scroll reveal
-const toReveal = document.querySelectorAll('.statement, .block, .gallery, .enroll');
+const toReveal = document.querySelectorAll('.statement, .block, .stats, .gallery, .enroll');
 toReveal.forEach(el => el.classList.add('reveal'));
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
